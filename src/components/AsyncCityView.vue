@@ -1,26 +1,40 @@
 <template>
-    <div>
-
+    <div class="flex flex-col flex-1 items-center">
+        <div class="flex flex-col items-center text-white py-10">
+            <h1 class="text-3xl mb-3">{{ route.params.city }}</h1>
+            <p>{{ getDayOfWeek() }}</p>
+            <img :src="`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`" alt="icon">
+            <p class="text-6xl mb-5">{{ Math.round(weatherData.main.temp) }}&deg;</p>
+        </div>
+        <hr class="border-white border-opacity-10 border w-full">
+        <router-link to="/" class="bg-white p-2">Back to Search!</router-link>
     </div>
 </template>
 
 <script setup>
 import axios from 'axios'
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
-const router = useRoute()
+const route = useRoute()
+
 
 const getWeatherData = async () => {
     try {
         const weatherData = await axios.get(
-            `https://api.openweathermap.org/data/2.5/weather?lat=${router.query.lat}&lon=${router.query.lon}&appid=b31ff412fa9480d19e05dcc0c7bb9c34`
-        )
-        return weatherData.data
-    } catch (err) {
-        console.log(err);
+            `https://api.openweathermap.org/data/2.5/weather?lat=${route.query.lat}&lon=${route.query.lon}&appid=b31ff412fa9480d19e05dcc0c7bb9c34&units=metric`
+            )
+            console.log(weatherData);
+            return weatherData.data
+        } catch (err) {
+            console.log(err);
+        }
     }
+    
+const getDayOfWeek = () => {
+    const options = { weekday: 'short' };
+    const dayOfWeek = new Date().toLocaleDateString('en-GB', options);
+    return dayOfWeek;
 }
-
 
 const weatherData = await getWeatherData();
 console.log(weatherData);
