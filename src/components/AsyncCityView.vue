@@ -1,13 +1,16 @@
 <template>
     <div class="flex flex-col flex-1 items-center">
         <div class="flex flex-col items-center text-white py-10">
-            <h1 class="text-3xl mb-3">{{ route.params.city }}</h1>
-            <p>{{ getDayOfWeek() }}</p>
-            <img :src="`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`" alt="icon">
-            <p class="text-6xl mb-5">{{ Math.round(weatherData.main.temp) }}&deg;</p>
+            <p class="text-2xl drop-shadow-md text-black">{{ getDayOfWeek() }}</p>
+            <div class="flex items-center">
+                <h1 class="text-5xl mb-3 text-white drop-shadow-md">{{ route.params.city }}</h1>
+                <img class="mb-6" :src="`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`" alt="icon">
+            </div>
+            <p class="text-5xl mb-5 drop-shadow-lg">{{ Math.round(weatherData.main.temp) }}&deg; / {{
+                weatherData.weather[0].description }}</p>
         </div>
         <hr class="border-white border-opacity-10 border w-full">
-        <router-link to="/" class="bg-white p-2">Back to Search!</router-link>
+        <router-link to="/" class="bg-white p-1.5 mt-3">Back to Search!</router-link>
     </div>
 </template>
 
@@ -31,7 +34,7 @@ const getWeatherData = async () => {
     }
     
 const getDayOfWeek = () => {
-    const options = { weekday: 'short' };
+    const options = { weekday: 'long' };
     const dayOfWeek = new Date().toLocaleDateString('en-GB', options);
     return dayOfWeek;
 }

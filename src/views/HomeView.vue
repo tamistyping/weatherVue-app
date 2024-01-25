@@ -3,6 +3,8 @@ import { ref } from "vue"
 import axios from "axios"
 import { useRouter } from "vue-router";
 
+import tornadoImage from '@/assets/tornado.png'
+
 const router = useRouter()
 const showCity = (searchResult) => {
   const [city, county] = searchResult.place_name.split(",")
@@ -44,22 +46,41 @@ const getSearchResults = () => {
 
 <template>
   <main class="container text-white">
-    <div class="pt-4 mb-8 relative">
-      <input type="text" v-model="searchQuery" @input="getSearchResults" placeholder="Type a City" class="py-2 px-2 w-full bg-transparent 
-      border focus:border-weather-secondary focus:outline-none">
-      <ul class="absolute bg-weather-secondary text-white w-full shadow-md py-2 px-1 top-[66]" v-if="searchResults">
-        <p v-if="searchError">This city doesn't exist. Please try again.</p>
-        <p v-if="!serverError && searchResults.length === 0">No results 😞 Try another city close by!</p>
-        <template v-else>
-          <li
-          v-for="searchResult in searchResults" 
-          :key="searchResult.id" 
-          class="py-2 cursor-pointer"
-          @click="showCity(searchResult)">
-            {{ searchResult.place_name }}
-          </li>
-        </template>
-      </ul>
+    <div class="pt-4 mb-8 relative flex flex-col items-center">
+      <div class="flex justify-center">
+        <input type="text" v-model="searchQuery" @input="getSearchResults" style="width: 50vmin;" placeholder="Type a City" class="py-2 px-2 bg-transparent border focus:border-weather-secondary focus:outline-none">
+      </div>
+      <div class="flex justify-center">
+        <ul style="width: 50vmin;" class="absolute bg-weather-secondary text-white shadow-md py-2 px-1 top-[66]" v-if="searchResults">
+          <p v-if="searchError">This city doesn't exist. Please try again.</p>
+          <p v-if="!serverError && searchResults.length === 0">No results 😞 Try another city close by!</p>
+          <template v-else>
+            <li
+              v-for="searchResult in searchResults" 
+              :key="searchResult.id" 
+              class="py-2 cursor-pointer"
+              @click="showCity(searchResult)">
+              {{ searchResult.place_name }}
+            </li>
+          </template>
+        </ul>
+      </div>
+      <img class="mt-4 tornado-animation" :src="tornadoImage" alt="tornado">
     </div>
   </main>
 </template>
+
+<style scoped>
+@keyframes moveOffScreen {
+  0% {
+    transform: translateX(-70vw);
+  }
+  100% {
+    transform: translateX(70vw);
+  }
+}
+
+.tornado-animation {
+  animation: moveOffScreen 5s linear infinite; /* Adjust the duration and timing function as needed */
+}
+</style>

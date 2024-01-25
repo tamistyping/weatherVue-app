@@ -7,8 +7,9 @@ module.exports = {
         "weather-secondary": "#282C35"
       },
     },
+
     fontFamily: {
-      Arial: ["Arial, sans-serif"]
+      Bebas: ["Bebas Neue, sans-serif"]
     },
     container: {
       padding: "2rem",
