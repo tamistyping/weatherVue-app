@@ -1,12 +1,12 @@
 <template>
     <div class="flex flex-col flex-1 items-center">
-        <div class="flex flex-col items-center text-white py-10">
+        <div class="flex flex-col items-center text-black py-10">
             <p class="text-2xl drop-shadow-md text-black">{{ getDayOfWeek() }}</p>
             <div class="flex items-center">
-                <h1 class="text-5xl mb-3 text-white drop-shadow-md">{{ route.params.city }}</h1>
+                <h1 class="text-5xl mb-3 text-black drop-shadow-md">{{ route.params.city }}</h1>
                 <img class="mb-6" :src="`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`" alt="icon">
             </div>
-            <p class="text-5xl mb-5 drop-shadow-lg">{{ Math.round(weatherData.main.temp) }}&deg; / {{
+            <p class="text-5xl mb-5 text-black drop-shadow-lg">{{ Math.round(weatherData.main.temp) }}&deg; / {{
                 weatherData.weather[0].description }}</p>
         </div>
         <hr class="border-white border-opacity-10 border w-full">
