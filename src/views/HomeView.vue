@@ -48,7 +48,7 @@ const getSearchResults = () => {
   <main class="container text-white">
     <div class="pt-4 mb-8 relative flex flex-col items-center">
       <div class="flex justify-center">
-        <input type="text" v-model="searchQuery" @input="getSearchResults" style="width: 50vmin;" placeholder="Type a City" class="py-2 px-2 bg-white border focus:border-weather-secondary focus:outline-none">
+        <input type="text" v-model="searchQuery" @input="getSearchResults" style="width: 50vmin;" placeholder="Type a City" class="py-2 px-2 text-black bg-white border focus:border-weather-secondary focus:outline-none">
       </div>
       <div class="flex justify-center">
         <ul style="width: 50vmin;" class="absolute bg-weather-secondary text-white shadow-md py-2 px-1 top-[66]" v-if="searchResults">
